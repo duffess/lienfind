@@ -60,7 +60,12 @@ export default function Grid({ grid, foundWords, placements, onWordFound }) {
 
   const handlePointerMove = useCallback((e) => {
     if (!isDragging) return;
-    const element = document.elementFromPoint(e.clientX, e.clientY);
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+    
+    if (clientX == null || clientY == null) return;
+    
+    const element = document.elementFromPoint(clientX, clientY);
     if (element) {
       const cell = element.closest('.cell');
       if (cell) {
@@ -79,6 +84,9 @@ export default function Grid({ grid, foundWords, placements, onWordFound }) {
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
       onPointerMove={handlePointerMove}
+      onTouchMove={handlePointerMove}
+      onTouchEnd={handlePointerUp}
+      onTouchCancel={handlePointerUp}
       style={{ touchAction: 'none' }}
     >
       <div
@@ -101,11 +109,8 @@ export default function Grid({ grid, foundWords, placements, onWordFound }) {
                 data-row={rowIdx}
                 data-col={colIdx}
                 className={`cell ${isFound ? 'found' : ''} ${isPreview ? 'preview' : ''} ${isStart ? 'start' : ''}`}
-                onPointerDown={(e) => {
-                  e.preventDefault();
-                  e.target.releasePointerCapture(e.pointerId); // Release capture so elementFromPoint works
-                  handlePointerDown(rowIdx, colIdx);
-                }}
+                onPointerDown={() => handlePointerDown(rowIdx, colIdx)}
+                onTouchStart={() => handlePointerDown(rowIdx, colIdx)}
                 onPointerEnter={() => handlePointerEnter(rowIdx, colIdx)}
               >
                 <span className="letter">{letter}</span>

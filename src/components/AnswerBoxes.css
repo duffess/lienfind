@@ -28,13 +28,22 @@
 }
 
 @keyframes status-pop {
-  0% { transform: scale(0); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .answer-box {
   width: 30px;
   height: 30px;
+  min-width: 0;
+  box-sizing: border-box;
   border: 2px solid var(--box-border);
   border-radius: 1px;
   display: flex;
@@ -69,6 +78,7 @@
     font-size: 0.65rem;
     border-width: 1px;
   }
+
   .answer-row {
     gap: 2px;
   }

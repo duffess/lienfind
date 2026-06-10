@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './Leaderboard.css';
 
-const API_URL = 'http://localhost:3001/api/scores';
+const API_URL = `http://${window.location.hostname}:3001/api/scores`;
 
 export default function Leaderboard({ refreshKey }) {
   const [scores, setScores] = useState([]);

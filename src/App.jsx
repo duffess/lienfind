@@ -18,7 +18,7 @@ const SECRET_ANSWER_WORDS = ['CONVENCIONAL', 'JUDICIAL', 'LEGAL'];
 const SECRET_ANSWER = SECRET_ANSWER_WORDS.join('');
 const ANSWER_HINT = '*Tipos de hipoteca';
 
-const API_URL = 'http://localhost:3001/api/scores';
+const API_URL = `http://${window.location.hostname}:3001/api/scores`;
 
 function App() {
   const [username, setUsername] = useState(null);

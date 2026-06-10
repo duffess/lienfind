@@ -8,6 +8,8 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .answer-status {
@@ -62,11 +64,11 @@
 
 @media (max-width: 480px) {
   .answer-box {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     font-size: 0.75rem;
   }
   .answer-row {
-    gap: 2px;
+    gap: 3px;
   }
 }

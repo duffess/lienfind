@@ -5,6 +5,7 @@ import AnswerBoxes from './components/AnswerBoxes';
 import NameInput from './components/NameInput';
 import Leaderboard from './components/Leaderboard';
 import { generateGrid } from './utils/gridGenerator';
+import { supabase } from './lib/supabase';
 import './App.css';
 
 // ─── Puzzle configuration ───
@@ -17,8 +18,6 @@ const GRID_COLS = 8;
 const SECRET_ANSWER_WORDS = ['CONVENCIONAL', 'JUDICIAL', 'LEGAL'];
 const SECRET_ANSWER = SECRET_ANSWER_WORDS.join('');
 const ANSWER_HINT = '*Tipos de hipoteca';
-
-const API_URL = `http://${window.location.hostname}:3001/api/scores`;
 
 function App() {
   const [username, setUsername] = useState(null);
@@ -65,13 +64,20 @@ function App() {
   useEffect(() => {
     if (isGameComplete && username && !savedRef.current) {
       savedRef.current = true;
-      fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, score: currentScore }),
-      })
-        .then(() => setLbRefreshKey(k => k + 1))
-        .catch(err => console.error('Erro ao salvar pontuação:', err));
+      
+      const saveScore = async () => {
+        const { error } = await supabase
+          .from('scores')
+          .insert([{ username, score: currentScore }]);
+          
+        if (error) {
+          console.error('Erro ao salvar pontuação:', error);
+        } else {
+          setLbRefreshKey(k => k + 1);
+        }
+      };
+      
+      saveScore();
     }
   }, [isGameComplete, username, currentScore]);
 

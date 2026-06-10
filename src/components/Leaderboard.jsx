@@ -1,21 +1,30 @@
 import { useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
 import './Leaderboard.css';
-
-const API_URL = `http://${window.location.hostname}:3001/api/scores`;
 
 export default function Leaderboard({ refreshKey }) {
   const [scores, setScores] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    fetch(API_URL)
-      .then(res => res.json())
-      .then(data => {
+    const fetchScores = async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('scores')
+        .select('username, score')
+        .order('score', { ascending: false })
+        .order('created_at', { ascending: true })
+        .limit(50);
+        
+      if (error) {
+        console.error('Erro ao buscar ranking:', error);
+      } else if (data) {
         setScores(data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
+      }
+      setLoading(false);
+    };
+
+    fetchScores();
   }, [refreshKey]);
 
   return (

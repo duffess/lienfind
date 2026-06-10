@@ -1,0 +1,80 @@
+.name-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.name-card {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  animation: fade-in 0.3s ease;
+}
+
+.name-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text);
+}
+
+.name-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.name-input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 2px solid var(--border);
+  border-radius: 2px;
+  outline: none;
+  background: var(--bg);
+  color: var(--text);
+  text-align: center;
+}
+
+.name-input:focus {
+  border-color: #0066cc;
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.15);
+}
+
+.name-btn {
+  padding: 0.55rem 2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 2px solid var(--border);
+  border-radius: 2px;
+  background: var(--text);
+  color: var(--bg);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.name-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.name-btn:not(:disabled):hover {
+  opacity: 0.85;
+}

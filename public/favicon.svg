@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" rx="12" fill="#0d0c0f"/>
+  <text x="50" y="42" text-anchor="middle" font-family="serif" font-weight="900" font-size="28" fill="#c0392b" letter-spacing="2">MURD</text>
+  <line x1="20" y1="50" x2="80" y2="50" stroke="#c0392b" stroke-width="1.5" opacity="0.5"/>
+  <text x="50" y="72" text-anchor="middle" font-family="monospace" font-weight="700" font-size="16" fill="#d4c9a8" letter-spacing="4">SEARCH</text>
+</svg>

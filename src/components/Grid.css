@@ -1,0 +1,63 @@
+.grid-container {
+  display: flex;
+  justify-content: center;
+  user-select: none;
+  touch-action: none;
+}
+
+.grid {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  cursor: pointer;
+  transition: background 0.1s ease;
+  position: relative;
+}
+
+.cell:hover:not(.found) {
+  background: #f0f0f0;
+}
+
+/* ─── Selection preview ─── */
+
+.cell.preview {
+  background: var(--highlight-soft);
+}
+
+.cell.preview .letter {
+  font-weight: 700;
+}
+
+.cell.start {
+  background: var(--highlight);
+}
+
+/* ─── Found (yellow highlight like the screenshot) ─── */
+
+.cell.found {
+  background: var(--highlight);
+}
+
+.cell.found .letter {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ─── Letter ─── */
+
+.letter {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: clamp(0.85rem, 2.5vw, 1.15rem);
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1;
+  pointer-events: none;
+  text-transform: uppercase;
+}

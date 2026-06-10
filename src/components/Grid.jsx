@@ -58,11 +58,28 @@ export default function Grid({ grid, foundWords, placements, onWordFound }) {
     setIsDragging(false);
   }, [startCell, currentCell, grid, placements, onWordFound]);
 
+  const handlePointerMove = useCallback((e) => {
+    if (!isDragging) return;
+    const element = document.elementFromPoint(e.clientX, e.clientY);
+    if (element) {
+      const cell = element.closest('.cell');
+      if (cell) {
+        const row = parseInt(cell.dataset.row, 10);
+        const col = parseInt(cell.dataset.col, 10);
+        if (!isNaN(row) && !isNaN(col)) {
+          setCurrentCell({ row, col });
+        }
+      }
+    }
+  }, [isDragging]);
+
   return (
     <div
       className="grid-container"
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
+      onPointerMove={handlePointerMove}
+      style={{ touchAction: 'none' }}
     >
       <div
         className="grid"
@@ -81,9 +98,12 @@ export default function Grid({ grid, foundWords, placements, onWordFound }) {
             return (
               <div
                 key={key}
+                data-row={rowIdx}
+                data-col={colIdx}
                 className={`cell ${isFound ? 'found' : ''} ${isPreview ? 'preview' : ''} ${isStart ? 'start' : ''}`}
                 onPointerDown={(e) => {
                   e.preventDefault();
+                  e.target.releasePointerCapture(e.pointerId); // Release capture so elementFromPoint works
                   handlePointerDown(rowIdx, colIdx);
                 }}
                 onPointerEnter={() => handlePointerEnter(rowIdx, colIdx)}

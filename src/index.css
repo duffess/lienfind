@@ -29,6 +29,11 @@ html, body, #root {
   background: #f0f0f0;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   color: var(--text);
 }

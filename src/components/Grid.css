@@ -11,6 +11,12 @@
   width: 100%;
 }
 
+@media (max-width: 480px) {
+  .grid {
+    gap: 4px;
+  }
+}
+
 .cell {
   display: flex;
   align-items: center;

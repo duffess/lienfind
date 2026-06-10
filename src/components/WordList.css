@@ -8,6 +8,12 @@
   gap: 0.2rem 2rem;
 }
 
+@media (max-width: 480px) {
+  .wordlist-grid {
+    gap: 0.2rem 0.5rem;
+  }
+}
+
 .word-item {
   font-family: 'Inter', sans-serif;
   font-size: 0.82rem;
